@@ -1,1 +1,0 @@
-ar -rc libmain.a *.o
