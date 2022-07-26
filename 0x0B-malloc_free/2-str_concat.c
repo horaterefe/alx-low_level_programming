@@ -1,91 +1,41 @@
 #include "main.h"
-#include <stdlib.h>
 
 /**
- * _strlen - give the length of a string
- * @s: the string
- *
- * Return: the length of a string
- */
-int _strlen(char *s)
-{
-	int i;
-
-	for (i = 0 ; s[i] != '\0' ; i++)
-		;
-	return (i);
-}
-
-/**
- * _strcat - concatenates two strings
- * @dest: input parameter string
- * @src: input parameter string
- *
- * Return: dest
- */
-char *_strcat(char *dest, char *src)
-{
-	int a;
-	int b;
-
-	a = 0;
-
-	while (dest[a] != 0)
-	{
-		a++;
-	}
-
-	b = 0;
-
-	while (src[b] != 0)
-	{
-		dest[a] = src[b];
-		a++;
-		b++;
-	}
-	return (dest);
-}
-
-/**
- * str_concat - concatenate to strings
- * @s1: the string to print
- * @s2: the string to print
- *
- * Return: pointer that contains the content of s1 followed by s2
- */
+* str_concat -> string concatinating function
+* @s1: string 1
+* @s2: string 2
+* Return: string 1 + string 2
+*/
 char *str_concat(char *s1, char *s2)
 {
-	int length;
-	char *space;
+	int i = 0, j = 0, l = 0, k = 0;
+	char *s;
 
-	if (s1 == '\0')
-	{
+	if (s1 == NULL)
 		s1 = "";
-	}
-	if (s2 == '\0')
-	{
+	if (s2 == NULL)
 		s2 = "";
-	}
+	while (s1[i])
+		i++;
+	while (s2[j])
+		j++;
 
-	length = _strlen(s1) + _strlen(s2);
-	if (s1 != '\0' && s2 != '\0')
+	l = i + j;
+	s = (char *)malloc(l * sizeof(char) + 1);
+	if (s == NULL)
+		return (NULL);
+	j = 0;
+	while (k < l)
 	{
-		space = malloc(sizeof(char) * length + 1);
-
-		if (space == '\0')
+		if (k < i)
+			s[k] = s1[k];
+		if (k >= i)
 		{
-			return ('\0');
+			s[k] = s2[j];
+			j++;
 		}
-		else
-		{
-			space = _strcat(space, s1);
-			space = _strcat(space, s2);
-		}
+		k++;
 	}
-	else
-	{
-		space = "";
-	}
-	return (space);
-	free(space);
+	s[k] = '\0';
+	return (s);
 }
